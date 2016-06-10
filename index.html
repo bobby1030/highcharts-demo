@@ -124,8 +124,16 @@
         xAxis: {
             type: 'datetime', // 類型：日期與時間
         },
+        yAxis: {
+        	// Y軸相關設定
+            labels: {
+				// 標籤選項
+                format: '{value} 人' // 標籤顯示格式：({值}人)
+            }
+        },
         tooltip: {
         	// 提示相關設定
+            valueSuffix: '人', // 值的後綴：人
             crosshairs: { // 滑鼠懸停時的輔助線
                 color: 'black', // 顏色：黑
                 dashStyle: 'solid' // 輔助線仰視：實線
@@ -163,6 +171,10 @@
             type: 'pie', // 類型：派圖
             width: 1200,
         },
+        tooltip: {
+        	// 提示相關設定
+            valueSuffix: '人', // 值的後綴：人
+		},
         series: [{
             name: '人數',
             data: [{
