@@ -11,6 +11,8 @@
 
 <body>
     <div id="column"></div>
+    <button id="plusone-1">+1 首個欄位（方法一）</button>
+    <button id="plusone-2">+1 首個欄位（方法二）</button>
     <div id="line"></div>
     <div id="pie"></div>
     <script type="text/javascript" charset="utf-8">
@@ -175,6 +177,21 @@
         }]
 
     })
+
+	$('#plusone-1').click(function(){
+		// 方法1
+		var chart = $('#column').highcharts() // 取得 ID 為 column 的元素之圖表的 DOM
+		data_set.death_rate.ROC[0] += 1 // 將 data_set 中的「2011年中華民國死亡率」資料加1
+		chart.series[0].update(true) // 重繪(無動畫)「2011年中華民國死亡率」欄位
+	})
+
+	$('#plusone-2').click(function(){
+		// 方法2
+		var chart = $('#column').highcharts() // 取得 ID 為 column 的元素之圖表的 DOM
+		var y = chart.series[0].data[0].y // 取得「圖表資料」中的「2011年中華民國死亡率」的資料
+		chart.series[0].data[0].update(y + 1) // 將「圖表資料」中的「2011年中華民國死亡率」資料加1且更新(有動畫)
+	})
+	
     </script>
 </body>
 
