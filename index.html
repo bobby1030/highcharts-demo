@@ -188,8 +188,8 @@
 	$('#plusone-2').click(function(){
 		// 方法2
 		var chart = $('#column').highcharts() // 取得 ID 為 column 的元素之圖表的 DOM
-		var y = chart.series[0].data[0].y // 取得「圖表資料」中的「2011年中華民國死亡率」的資料
-		chart.series[0].data[0].update(y + 1) // 將「圖表資料」中的「2011年中華民國死亡率」資料加1且更新(有動畫)
+		var y = chart.series[0].data[0].y // 取得「圖表實體」中的「2011年中華民國死亡率」的資料
+		chart.series[0].data[0].update(y + 1) // 將「圖表實體」中的「2011年中華民國死亡率」資料加1且更新(有動畫)
 	})
 	
     </script>
