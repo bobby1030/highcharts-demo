@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HighCharts JS</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//code.highcharts.com/highcharts.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//code.highcharts.com/highcharts-more.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="column"></div>
+    <div id="line"></div>
+    <div id="pie"></div>
+    <script type="text/javascript" charset="utf-8">
+    $('#column').highcharts({
+        title: {
+            text: '死亡與肥宅出現率'
+        },
+        chart: {
+            type: 'column',
+            width: 1200,
+            zoomType: 'xy',
+        },
+        xAxis: {
+            type: 'category',
+            categories: ['越南', '阿魯巴', '關島', '澳門', '天龍國']
+        },
+        yAxis: {
+        	labels: {
+                format: '{value}%'
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: '死亡率',
+            data: [24.26, 17.48, 10.01, 5.84, 6.33]
+        }, {
+            name: '不負責任統計肥宅出現率',
+            data: [
+                50, 70, 20, 30, 99
+            ]
+        }]
+    })
+
+    $('#line').highcharts({
+        title: {
+            text: '出生人數'
+        },
+        subtitle: {
+            text: 'Taipei City (Data From Taipei City Government)'
+        },
+        chart: {
+            type: 'area',
+            width: 1200,
+            zoomType: 'x'
+        },
+        xAxis: {
+            type: 'datetime',
+        },
+        tooltip: {
+            crosshairs: {
+                color: 'black',
+                dashStyle: 'solid'
+            }
+        },
+        series: [{
+            name: '出生率',
+            data: [
+                [Date.UTC(2001, 0, 1), 26998],
+                [Date.UTC(2002, 0, 1), 25647],
+                [Date.UTC(2003, 0, 1), 23311],
+                [Date.UTC(2004, 0, 1), 22154],
+                [Date.UTC(2005, 0, 1), 20962],
+                [Date.UTC(2006, 0, 1), 21151],
+                [Date.UTC(2007, 0, 1), 21620],
+                [Date.UTC(2008, 0, 1), 20691],
+                [Date.UTC(2009, 0, 1), 19403],
+                [Date.UTC(2010, 0, 1), 18530],
+                [Date.UTC(2011, 0, 1), 25132],
+                [Date.UTC(2012, 0, 1), 29498],
+                [Date.UTC(2013, 0, 1), 26710],
+                [Date.UTC(2014, 0, 1), 29024],
+                [Date.UTC(2015, 0, 1), 28987]
+            ],
+            dataLabels: {
+                align: 'center',
+                enabled: true
+            }
+        }],
+        credits: false
+
+    })
+
+
+    $('#pie').highcharts({
+        title: {
+            text: '15年間出生分佈'
+        },
+        subtitle: {
+            text: 'Taipei City (Data From Taipei City Government)'
+        },
+        chart: {
+            type: 'pie',
+            width: 1200,
+        },
+        series: [{
+            name: '出生人數',
+            data: [{
+                y: 26998,
+                name: '90年'
+            }, {
+                y: 25647,
+                name: '91年'
+            }, {
+                y: 23311,
+                name: '92年'
+            }, {
+                y: 22154,
+                name: '93年'
+            }, {
+                y: 20962,
+                name: '94年'
+            }, {
+                y: 21151,
+                name: '95年'
+            }, {
+                y: 21620,
+                name: '96年'
+            }, {
+                y: 20691,
+                name: '97年'
+            }, {
+                y: 19403,
+                name: '98年'
+            }, {
+                y: 18530,
+                name: '99年'
+            }, {
+                y: 25132,
+                name: '100年'
+            }, {
+                y: 29498,
+                name: '101年'
+            }, {
+                y: 26710,
+                name: '102年'
+            }, {
+                y: 29024,
+                name: '103年'
+            }, {
+                y: 28987,
+                name: '104年'
+            }]
+        }],
+        credits: false
+
+    })
+    </script>
+</body>
+
+</html>
