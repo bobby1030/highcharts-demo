@@ -14,67 +14,15 @@
     <div id="line"></div>
     <div id="pie"></div>
     <script type="text/javascript" charset="utf-8">
-    $('#column').highcharts({
-        title: {
-            text: '死亡與肥宅出現率'
-        },
-        chart: {
-            type: 'column',
-            width: 1200,
-            zoomType: 'xy',
-        },
-        xAxis: {
-            type: 'category',
-            categories: ['越南', '阿魯巴', '關島', '澳門', '天龍國']
-        },
-        yAxis: {
-        	labels: {
-                format: '{value}%'
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        series: [{
-            name: '死亡率',
-            data: [24.26, 17.48, 10.01, 5.84, 6.33]
-        }, {
-            name: '不負責任統計肥宅出現率',
-            data: [
-                50, 70, 20, 30, 99
-            ]
-        }]
-    })
-
-    $('#line').highcharts({
-        title: {
-            text: '出生人數'
-        },
-        subtitle: {
-            text: 'Taipei City (Data From Taipei City Government)'
-        },
-        chart: {
-            type: 'area',
-            width: 1200,
-            zoomType: 'x'
-        },
-        xAxis: {
-            type: 'datetime',
-        },
-        tooltip: {
-            crosshairs: {
-                color: 'black',
-                dashStyle: 'solid'
-            }
-        },
-        series: [{
-            name: '出生率',
-            data: [
-                [Date.UTC(2001, 0, 1), 26998],
-                [Date.UTC(2002, 0, 1), 25647],
-                [Date.UTC(2003, 0, 1), 23311],
-                [Date.UTC(2004, 0, 1), 22154],
-                [Date.UTC(2005, 0, 1), 20962],
+	var data_set = {
+		death_rate: {
+			ROC: [6.6, 6.6, 6.7],
+			JP: [9.9, 10.0, 10.1],
+			ZAF: [11.3, 11.0, 10.7]
+			// 國家: [2011年, 2012年, 2013年]
+		},
+		born: {
+			TPE: [
                 [Date.UTC(2006, 0, 1), 21151],
                 [Date.UTC(2007, 0, 1), 21620],
                 [Date.UTC(2008, 0, 1), 20691],
@@ -85,7 +33,103 @@
                 [Date.UTC(2013, 0, 1), 26710],
                 [Date.UTC(2014, 0, 1), 29024],
                 [Date.UTC(2015, 0, 1), 28987]
-            ],
+            ]
+			// 城市: [[UTC年份, 人數],[UTC年份, 人數],[UTC年份, 人數],etc.]
+		},
+		death: {
+			TPE: [
+                [Date.UTC(2006, 0, 1), 14011],
+                [Date.UTC(2007, 0, 1), 14871],
+                [Date.UTC(2008, 0, 1), 15606],
+                [Date.UTC(2009, 0, 1), 15260],
+                [Date.UTC(2010, 0, 1), 15398],
+                [Date.UTC(2011, 0, 1), 15988],
+                [Date.UTC(2012, 0, 1), 16579],
+                [Date.UTC(2013, 0, 1), 16379],
+                [Date.UTC(2014, 0, 1), 17177],
+                [Date.UTC(2015, 0, 1), 17106]
+            ]
+			// 城市: [[UTC年份, 人數],[UTC年份, 人數],[UTC年份, 人數],etc.]
+		},
+		gender: {
+			TPE: {
+				male: 1295462,
+				female: 1409348
+			}
+		}
+	}
+
+
+    $('#column').highcharts({
+        title: {
+            text: '國家粗死亡率'
+        },
+        subtitle: {
+            text: '單位：‰（每1000人的死亡總數）'
+        },
+        chart: {
+            type: 'column',
+            width: 1200,
+            zoomType: 'x',
+        },
+        xAxis: {
+            type: 'category',
+            categories: ['2011年', '2012年', '2013年']
+        },
+        yAxis: {
+            labels: {
+                format: '{value} 人'
+            }
+        },
+        tooltip: {
+            valueSuffix: '人'
+        },
+        series: [{
+            name: '中華民國',
+            data: data_set.death_rate.ROC
+        }, {
+            name: '日本',
+            data: data_set.death_rate.JP
+        }, {
+            name: '南非',
+            data: data_set.death_rate.ZAF
+        }],
+        credits: false
+    })
+
+    $('#line').highcharts({
+        title: {
+            text: '臺北市近10年新生兒人數'
+        },
+        subtitle: {
+            text: 'Data From Taipei City Government'
+        },
+        chart: {
+            type: 'line',
+            width: 1200,
+            zoomType: 'x'
+        },
+        xAxis: {
+            type: 'datetime',
+        },
+        tooltip: {
+            crosshairs: {
+                color: 'black',
+                dashStyle: 'solid'
+            },
+            shared: true
+        },
+        series: [{
+            name: '新生兒人數',
+            data: data_set.born.TPE,
+            dataLabels: {
+                align: 'center',
+                enabled: true
+            }
+        },{
+            name: '死亡人數',
+            data: data_set.death.TPE
+            ,
             dataLabels: {
                 align: 'center',
                 enabled: true
@@ -98,62 +142,25 @@
 
     $('#pie').highcharts({
         title: {
-            text: '15年間出生分佈'
+            text: '104年12月 臺北市男女市民人數'
         },
         subtitle: {
-            text: 'Taipei City (Data From Taipei City Government)'
+            text: '以戶籍登記資料為主 Data From Taipei City Government'
         },
         chart: {
             type: 'pie',
             width: 1200,
         },
         series: [{
-            name: '出生人數',
+            name: '人數',
             data: [{
-                y: 26998,
-                name: '90年'
+                name: '男性市民',
+                color: 'lightblue',
+                y: data_set.gender.TPE.male
             }, {
-                y: 25647,
-                name: '91年'
-            }, {
-                y: 23311,
-                name: '92年'
-            }, {
-                y: 22154,
-                name: '93年'
-            }, {
-                y: 20962,
-                name: '94年'
-            }, {
-                y: 21151,
-                name: '95年'
-            }, {
-                y: 21620,
-                name: '96年'
-            }, {
-                y: 20691,
-                name: '97年'
-            }, {
-                y: 19403,
-                name: '98年'
-            }, {
-                y: 18530,
-                name: '99年'
-            }, {
-                y: 25132,
-                name: '100年'
-            }, {
-                y: 29498,
-                name: '101年'
-            }, {
-                y: 26710,
-                name: '102年'
-            }, {
-                y: 29024,
-                name: '103年'
-            }, {
-                y: 28987,
-                name: '104年'
+                name: '女性市民',
+                color: 'pink',
+                y: data_set.gender.TPE.female
             }]
         }],
         credits: false
