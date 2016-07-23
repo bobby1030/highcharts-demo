@@ -170,8 +170,8 @@ $('#pie').highcharts({
 
 $('#plusone-1').click(function() {
     // 方法1
-    var chart = $('#column').highcharts() // 取得 ID 為 column 的元素之圖表的 DOM
     data_set.death_rate.ROC[0] += 1 // 將 data_set 中的「2011年中華民國死亡率」資料加1
+    var chart = $('#column').highcharts() // 取得 ID 為 column 的元素之圖表的 DOM
     chart.series[0].update(true) // 重繪(無動畫)「2011年中華民國死亡率」欄位
 })
 
